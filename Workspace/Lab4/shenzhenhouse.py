@@ -57,9 +57,27 @@ def draw_heatmap(data, index, columns, values):
 
 def draw_hist2(data):
     fig, (ax0, ax1) = plt.subplots(nrows=2, figsize=(9, 6))
-    x = data["总价"]
+    x = data["单价"]
     ax0.hist(x,100,normed=1,histtype='bar',facecolor='yellowgreen',alpha=0.75) 
     ax1.hist(x,20,normed=1,histtype='bar',facecolor='pink',alpha=0.75,cumulative=True,rwidth=0.8)
+    plt.show()
+
+def fine_huxing(data):
+    group1 = data.loc[:, ["户型", "带看人数"]].groupby("户型")
+    print([x for x in group1])
+    price = group1.mean()
+    plt.bar(price.index, price["带看人数"])
+    plt.xlabel("huxing")
+    plt.ylabel("daikanrenshu")
+    plt.title("huxing/daikanrenshu")
+    plt.show()
+
+def draw_bar(data, min, max):
+    _data = data.loc[(data["单价"]>=min) & (data["单价"]<max)]
+    plt.hist(_data["单价"], bins=40, facecolor="blue", edgecolor="black", alpha=0.7)
+    plt.xlabel("huxing")
+    plt.ylabel("daikanrenshu")
+    plt.title("huxing/daikanrenshu")
     plt.show()
 
 if __name__ == "__main__":
@@ -67,7 +85,9 @@ if __name__ == "__main__":
     # draw_hist(data)
     # draw_box(data)
     # draw_heatmap(data, "区", "朝向", "总价")
-    draw_hist2(data)
+    # draw_hist2(data)
+    # fine_huxing(data)
+    draw_bar(data, 0, 70000)
     
     
 
