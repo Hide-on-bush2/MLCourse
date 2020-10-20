@@ -69,4 +69,5 @@ if __name__ == "__main__":
     # draw_heatmap(data, "区", "朝向", "总价")
     draw_hist2(data)
     
+    
 
